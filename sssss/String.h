@@ -39,6 +39,10 @@ public:
 	void Concat(const char* another);
 	void Concat(int number);
 	void Concat(double number);
-	bool Contains(string another) const
+	bool Contains(string another) const;
+	String& operator=(const String& another);
+	String& operator=(const char* text);
+	char& operator[](int index);
+
 };
 
