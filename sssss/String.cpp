@@ -20,7 +20,7 @@ String::~String()
 	}
 }
 
-// геттеры-сеттеры
+// РіРµС‚С‚РµСЂС‹-СЃРµС‚С‚РµСЂС‹
 string String::GetString() const
 {
 	return text;
@@ -46,7 +46,7 @@ int String::GetLength() const
 	return length;
 }
 
-// метода SetLength не должно быть!
+// РјРµС‚РѕРґР° SetLength РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ!
 
 int String::GetCapacity() const
 {
@@ -59,7 +59,7 @@ void String::Clear()
 	length = 0;
 }
 
-// подгоняем capacity под length + 1
+// РїРѕРґРіРѕРЅСЏРµРј capacity РїРѕРґ length + 1
 void String::ShrinkToFit()
 {
 	if (capacity == length + 1)
@@ -109,7 +109,7 @@ bool String::Contains(string another) const
 
 
 
-// отладочній метод, потом можно будет удалить
+// РѕС‚Р»Р°РґРѕС‡РЅС–Р№ РјРµС‚РѕРґ, РїРѕС‚РѕРј РјРѕР¶РЅРѕ Р±СѓРґРµС‚ СѓРґР°Р»РёС‚СЊ
 void String::ShowInfo() const
 {
 	cout << "Text: " << GetString() << endl;
@@ -135,6 +135,25 @@ const char* String::GetCharArray(unsigned int index) const
 	if (index <= length) cout << text[index];
 	else cout << "error\n";
 	
+}
+String& String::operator=(const String& another)
+{
+	if (this == &another) return *this;
+	capacity = another.capacity;
+	length = another.length;
+	delete[] text;
+	text = new char[capacity];
+
+	for (int i = 0; i < length; i++)
+		text[i] = another.text[i];
+	text[length] = '\0';
+
+	return *this;
+}
+char& String::operator[](int index)
+{
+	if (index >= 0 && index < length) return  text[index];
+	else throw std::exception("out of memory!!!");
 }
 // return strcmp(a.text, b.text);
 //void String::Concat(const char* another)
